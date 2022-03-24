@@ -4,9 +4,9 @@ import {getDB} from '*/config/mongodb'
 // define Card collection
 const cardCollectionName = 'cards'
 const cardCollectionSchema = Joi.object({
-    boardID:Joi.string().required(),
-    columnID:Joi.string().required(),
-    title:Joi.string().required().min(3).max(20),
+    boardId:Joi.string().required(),
+    columnId:Joi.string().required(),
+    title:Joi.string().required().min(3).max(35).trim(),
     cover:Joi.string().default(null),
     createdAt: Joi.date().timestamp().default(Date.now()),
     updatedAt: Joi.date().timestamp().default(null),
@@ -23,7 +23,7 @@ const createNew = async (data) => {
         const result = await getDB().collection(cardCollectionName).insertOne(value)
         return result
     } catch (error) {
-        console.error(error)
+        throw new Error(error)
     }
 }
 
