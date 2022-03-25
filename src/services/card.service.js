@@ -1,9 +1,13 @@
-import { CardModel } from '*/models/card.model';
+import { CardModel } from '*/models/card.model'
+import { ColumnModel } from '*/models/column.model'
 
 const createNew = async (data) => {
     try {
-        const result = await CardModel.createNew(data)
-        return result
+        const newCard = await CardModel.createNew(data)
+        const updatedColumn = await ColumnModel.pushCardOrder(data.columnId, newCard.insertedId)
+        if (updatedColumn)
+            return newCard // update successfully
+        return null // update failed
     } catch (error) {
         throw new Error(error)
     }
