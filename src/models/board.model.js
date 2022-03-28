@@ -80,7 +80,11 @@ const getFullBoard = async (boardId) => {
 
 const update = async (id, data) => {
     try {
-        const updateData = {...data }
+        const convertColumn = data.columnOrder.map(column => ObjectId(column))
+        const updateData = {
+            ...data,
+            columnOrder: convertColumn
+        }
         const result = await getDB().collection(boardCollectionName).findOneAndUpdate(
             {   _id: ObjectId (id) },
             {   $set: updateData },
