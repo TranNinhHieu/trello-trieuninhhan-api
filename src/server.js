@@ -25,7 +25,7 @@ const bootServer = () =>{
     // use APIs v1
    app.use('/v1', apiV1)
     
-    app.listen(env.APP_PORT, env.APP_HOST, () => {
-        console.log(`hello ${env.APP_HOST}:${env.APP_PORT}/`)
-    })
+   app.listen(process.env.PORT, () => {
+    console.log(`Hello , I'm running at :${process.env.APP_PORT}/`)
+})
 }
