@@ -5,9 +5,9 @@ const createNew = async (data) => {
     try {
         const newCard = await CardModel.createNew(data)
         const updatedColumn = await ColumnModel.pushCardOrder(data.columnId, newCard.insertedId)
-        if (updatedColumn)
-            return newCard // update successfully
-        return null // update failed
+        // if (updatedColumn)
+        //     return data // update successfully
+        // return null // update failed
     } catch (error) {
         throw new Error(error)
     }
