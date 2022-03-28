@@ -52,7 +52,11 @@ const pushCardOrder = async (columnId, cardId) => {
 
 const update = async (id, data) => {
     try {
-        const updateData = { ...data }
+        const convertCard = data.cardOrder.map(card => ObjectId(card))
+        const updateData = {
+            ...data,
+            cardOrder: convertCard
+        }
         if(data.boardId){
             updateData.boardId = ObjectId(data.boardId)
         }
